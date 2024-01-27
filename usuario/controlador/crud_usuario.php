@@ -42,7 +42,7 @@ switch ($procedimiento) {
       $nombre=$resultado['nombre'];
       $apellido=$resultado['apellido'];
       $genero=$resultado['genero'];
-      $nivel_academico=$resultado['fk_nivel_academico'];      
+      $nivel_academico=$resultado['fk_nivel_academico'];
       $edad=$resultado['edad'];
       $correo=$resultado['correo'];
       $telefono=$resultado['telefono'];
@@ -97,14 +97,14 @@ switch ($procedimiento) {
     $enlace="";
     $condicion="1=1";
     $consultar_estatus=$obj_usuario->consultar($tabla, $campos, $enlace, $condicion);
-    $option_estatus='<option selected value="0">SELECCIONE...</option>';      
+    $option_estatus='<option selected value="0">SELECCIONE...</option>';
     while ($select_estatus=pg_fetch_array($consultar_estatus)){
           if ($estatus===$select_estatus["pk_estatus_usuario"]){
               $option_estatus=$option_estatus.'<option selected value="'.$select_estatus["pk_estatus_usuario"].'">'.$select_estatus["descripcion_estatus_usuario"].'</option>';
           }else{
               $option_estatus=$option_estatus.'<option value="'.$select_estatus["pk_estatus_usuario"].'">'.$select_estatus["descripcion_estatus_usuario"].'</option>';
           }
-    }    
+    }
 
     $masculino=$genero==='Masculino'? "selected" : "";
     $femenino=$genero==='Femenino'? "selected" : "";

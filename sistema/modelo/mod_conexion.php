@@ -12,9 +12,9 @@
 		function __construct(){
 			$this->user='postgres';
 			$this->password='postgres';
-			$this->server='10.10.2.154';
-			$this->port='5432';
-			$this->database='mesas_reciclaje';			
+			$this->server='localhost';
+			$this->port='5433';
+			$this->database='mesas_reciclaje';
 			$this->conex='';
 		}
 

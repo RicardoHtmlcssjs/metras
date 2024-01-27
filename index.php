@@ -82,6 +82,13 @@
     </style>   
 </head>
 <body>
+  <?php
+    $usu = "anuvaez";
+    $e = md5($usu);
+    echo $e . "<br>";
+    echo md5($e);
+    
+  ?>
     <div id="wrapper">
       <header class="col-xm-12">
         <div class="container-fluid">
@@ -112,7 +119,7 @@
             <div class="row">
               <div class="col-lg-12">
                   <div class="panel panel-default" style="margin: 0 auto; width: 350px;">
-                      <div style="text-align: center;">                        
+                      <div style="text-align: center;">
                         <img src="sistema/img/METRAS_logo.png" alt="LOGO" style="width: 350px; height: 150px;">
                       </div>
                       <div class="panel-heading">

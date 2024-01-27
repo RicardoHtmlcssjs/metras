@@ -98,25 +98,25 @@ if ($_SESSION['privilegio']==3) {
                     </li-->
                     <li>
                         <a id="menu-materiales" href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_all_mesas.php');" style="background-color: #0c4370;">Mesas</a>
-                    </li>                    
+                    </li>
                     <li>
                         <a href="#" style="background-color: #0c4370;">Reportes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level" style="background:#bfbdbd;">
                             <li>
                                 <a href="#" onclick="cargar_contenido(this, 'sistema/vista/grafico_cantidad_mesas_e.php');">Cantidad de Mesas por Estado</a>
-                            </li>                            
+                            </li>
                             <li>
                                 <a href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_cantidad_mesas.php');">Cantidad de Mesas por Municipio</a>
                             </li>
                             <li>
                                 <a href="#" onclick="cargar_contenido(this, 'sistema/vista/grafico_cantidad_integrantes_e.php');">Cantidad de Integrantes por Estado</a>
-                            </li>                            
+                            </li>
                             <li>
                                 <a href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_cantidad_integrantes.php');">Cantidad de Integrantes por Municipio</a>
                             </li>
                             <li>
                                 <a href="#" onclick="cargar_contenido(this, 'sistema/vista/grafico_cantidad_reciclaje_e.php');">Cantidad de Reciclaje por Estado</a>
-                            </li>                            
+                            </li>
                             <li>
                                 <a href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_cantidad_reciclaje.php');">Cantidad de Reciclaje por Municipio</a>
                             </li>
