@@ -98,10 +98,13 @@ if ($_SESSION['id_usuario']) {
                     </li>
                     <li <?php echo $display; ?>>
                         <a id="menu-mesas" href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_carga_mesa.php', <?php echo $_SESSION['mesa'];?>);" style="background-color: #0c4370;">Mesas</a>
-                    </li>                    
+                    </li>
                     <li>
                         <a id="menu-materiales" href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_materiales.php', <?php echo $_SESSION['mesa'];?>);" style="background-color: #0c4370;">Materiales</a>
-                    </li>                    
+                    </li>
+                    <li>
+                        <a id="menu-constancia-inscrip" name="menu-constancia-inscrip" href="#" onClick="acciones_usuarios.certificado_inscrip(1)" style="background-color: #0c4370;">Certificado de Inscripción</a>
+                    </li>
 
                     <!--li <?php #echo $display2; ?>>
                         <a href="#" style="background-color: #0c4370;">Reportes<span class="fa arrow"></span></a>
@@ -148,6 +151,7 @@ if ($_SESSION['id_usuario']) {
     <!-- Morris Chart Js -->
     <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
     <script src="assets/js/morris/morris.js"></script>
+    <script src="usuario/js/accion_button.js"></script>
 
      <!-- DATA TABLE SCRIPTS -->
     <!--script src="assets/js/dataTables/jquery.dataTables.js"></script>

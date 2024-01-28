@@ -16,7 +16,7 @@
             width: 100%;
             padding: 3px;
             box-sizing: border-box;
-        }        
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -82,7 +82,7 @@
                                   <th>Nombre</th>
                                   <th>Apellido</th>
                                   <!--th>Estatus</th-->
-                                  <th style="<?php echo $options_button; ?>">Opciones</th>                                
+                                  <th style="<?php echo $options_button; ?>">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
