@@ -1,12 +1,13 @@
 <?php
-    require('./fpdf/fpdf.php');
+// session_start();
+    require('../js/fpdf/fpdf.php');
     class PDF extends FPDF{
         function Header(){
-            $this->Image('img/fondo_1.png', 0, 0, 200);
-            $this->Image('img/fondo_2.png', 0, 0, 190);
-            $this->Image('img/logo_1.png', 0, 25, 120);
-            $this->Image('img/imagen_aba_izq1.png', 20, 195, 22);
-            $this->Image('img/imagen_aba_der_1.png', 235, 195, 17);
+            $this->Image('../../img/fondo_1.png', 0, 0, 200);
+            $this->Image('../../img/fondo_2.png', 0, 0, 190);
+            $this->Image('../../img/logo_1.png', 0, 25, 120);
+            $this->Image('../../img/imagen_aba_izq1.png', 20, 195, 22);
+            $this->Image('../../img/imagen_aba_der_1.png', 235, 195, 17);
             $this->SetFont('Arial', '', 25);
             /* ENCABEZADO */
             $this->Cell(110);  // mover a la derecha
@@ -75,9 +76,9 @@
             $this->Cell(0, 10, utf8_decode('Josué Alejandro Lorca Vega'), 0, 0, 'C'); //pie de pagina(numero de pagina)
         }
     }
-    $pdf = new PDF();
-    $pdf->AddPage("landscape", "letter"); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
-    $pdf->AliasNbPages();
-    $pdf->SetFont('Arial', '', 12); //colorBorde
-    $pdf->Output('inicio.pdf', 'I');
+        $pdf = new PDF();
+        $pdf->AddPage("landscape", "letter"); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
+        $pdf->AliasNbPages();
+        $pdf->SetFont('Arial', '', 12); //colorBorde
+        $pdf->Output('inicio.pdf', 'D');
 ?>

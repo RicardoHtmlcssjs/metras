@@ -8,6 +8,7 @@ if ($_SESSION['id_usuario']) {
     }else if ($_SESSION['privilegio']==3) {
         header("Location: consultas.php");
     }
+    // require("./sistema/vista/constancia_inscripcion.php");
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -103,7 +104,7 @@ if ($_SESSION['id_usuario']) {
                         <a id="menu-materiales" href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_materiales.php', <?php echo $_SESSION['mesa'];?>);" style="background-color: #0c4370;">Materiales</a>
                     </li>
                     <li>
-                        <a id="menu-constancia-inscrip" name="menu-constancia-inscrip" href="#" onClick="acciones_usuarios.certificado_inscrip(1)" style="background-color: #0c4370;">Certificado de Inscripción</a>
+                        <a id="menu-constancia-inscrip" name="menu-constancia-inscrip" href="sistema/vista/constancia_inscripcion.php" target="_blank"   style="background-color: #0c4370;">Certificado de Inscripción</a>
                     </li>
 
                     <!--li <?php #echo $display2; ?>>
