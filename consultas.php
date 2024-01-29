@@ -120,6 +120,12 @@ if ($_SESSION['privilegio']==3) {
                             <li>
                                 <a href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_cantidad_reciclaje.php');">Cantidad de Reciclaje por Municipio</a>
                             </li>
+                            <li>
+                                <a href="./sistema/modelo/mod_excel_todas_metras_reporte.php" >Reporte todas las metras</a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="alert()">Reporte usuarios de metras</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

@@ -1,6 +1,20 @@
 <?php
-// session_start();
+    session_start();
+    $id_usu = $_SESSION["id_usuario"];
     require('../js/fpdf/fpdf.php');
+    require_once "../../usuario/modelo/mod_usuario.php";
+    $tabla = "usuarios";
+    $campos = "nombre_mesa, descripcion_estado, codigo_situr";
+    $enlace = "INNER JOIN mesas ON pk_mesa=fk_mesa INNER JOIN consejos_comunales ON pk_consejo_comunal=fk_consejo_comunal INNER JOIN estado ON pk_estado=fk_estado";
+    $condicion = "pk_usuario = $id_usu";
+    $obj_usuario=new usuarios();
+	$func_consultar=$obj_usuario->consultar($tabla, $campos, $enlace, $condicion);
+    if ($resultado=pg_fetch_array($func_consultar)){
+        $_SESSION["codigo_situr_certificado_imp"] = $resultado['codigo_situr'];
+        $_SESSION["nombre_mesa_certificado_imp"] = $resultado['nombre_mesa'];
+        $_SESSION["descripcion_estado_certificado_imp"] = $resultado['descripcion_estado'];
+    }
+
     class PDF extends FPDF{
         function Header(){
             $this->Image('../../img/fondo_1.png', 0, 0, 200);
@@ -30,22 +44,19 @@
             $this->SetFont('Arial', '', 12);
             $this->Cell(59, 75, utf8_decode("OTORGADO AL EQUIPO DE TRABAJO DE LAS METRAS"), 0, 0, '', 0);
             $this->Ln(5);
-            
-            //CUERPO DEDICADO
-            $this->Cell(120); 
-            $this->SetFont('Arial', 'B', 33);
-            $this->Cell(0, 115, utf8_decode("U-CCO-07-06-01-014622"), 0, 0, 'C', 0);
-            $this->Ln(5);
 
-            $this->Cell(120); 
-            $this->SetFont('Arial', 'I', 33);
-            $this->Cell(0, 135, utf8_decode("19 de Diciembre"), 0, 0, 'C', 0);
-            $this->Ln(5);
+                //CUERPO DEDICADO
+                $this->SetFont('Arial', 'B', 33);
+                $this->Cell(0, 115, utf8_decode($_SESSION["codigo_situr_certificado_imp"]), 0, 0, 'R', 0);
+                $this->Ln(5);
 
-            $this->Cell(127); 
-            $this->SetFont('Arial', 'B', 33);
-            $this->Cell(0, 155, utf8_decode("AMAZONAS"), 0, 0, 'C', 0);
-            $this->Ln(5);
+                $this->SetFont('Arial', 'I', 33);
+                $this->Cell(0, 135, utf8_decode($_SESSION["nombre_mesa_certificado_imp"]), 0, 0, 'R', 0);
+                $this->Ln(5);
+
+                $this->SetFont('Arial', 'B', 33);
+                $this->Cell(0, 155, utf8_decode($_SESSION["descripcion_estado_certificado_imp"]), 0, 0, 'R', 0);
+                $this->Ln(5);
 
             // CUERPO DEBAJO
             // $this->Cell(110);  // mover a la derecha
@@ -80,5 +91,5 @@
         $pdf->AddPage("landscape", "letter"); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
         $pdf->AliasNbPages();
         $pdf->SetFont('Arial', '', 12); //colorBorde
-        $pdf->Output('inicio.pdf', 'D');
+        $pdf->Output('certificado_' . $_SESSION['id_usuario'] . $_SESSION['nombre'] . '.pdf', 'D');
 ?>

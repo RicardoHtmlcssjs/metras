@@ -83,7 +83,7 @@
 </head>
 <body>
   <?php
-    $usu = "anuvaez";
+    $usu = "msalgado";
     $e = md5($usu);
     echo $e . "<br>";
     echo md5($e);

@@ -15,7 +15,7 @@
 	    private $usuario;
 	    private $material;
 		private $cantidad;
-		private $peso;		
+		private $peso;
 		private $fecha;
 		private $pg_connect;
 
