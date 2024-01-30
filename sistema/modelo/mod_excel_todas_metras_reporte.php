@@ -19,7 +19,10 @@
     $obj_usuario=new usuarios();
     $func_consultar=$obj_usuario->consultar($tabla, $campos, $enlace, $condicion);
 
+    // se instancia la hoja calculo
     $spreadsheet = new SpreadSheet();
+    // instanciando la fecha
+    $fecha = new DateTime();
     // ESPESIFICADOR CREADO Y TITULO
     $spreadsheet->getProperties()->setCreator("Ricardo Torres")->setTitle("Todas las metras");
 
@@ -28,35 +31,39 @@
     $hojaActiva = $spreadsheet->getActiveSheet();
     // fuente
     $spreadsheet->getDefaultStyle()->getFont()->setName('Arial');
-
-    $hojaActiva->setCellValue("A1", 'CEDULA');
+    // fecha
+    $f_tit =  $fecha->format('Y-m-d');
+    //
+    $hojaActiva->mergeCells('A1:M1');
+    $hojaActiva->setCellValue("A1", $f_tit . ' METRAS - TODAS LAS METRAS');
+    $hojaActiva->setCellValue("A2", 'CEDULA');
     $hojaActiva->getColumnDimension('A')->setWidth(12);
-    $hojaActiva->setCellValue("B1", "NOMBRE");
+    $hojaActiva->setCellValue("B2", "NOMBRE");
     $hojaActiva->getColumnDimension('B')->setWidth(14);
-    $hojaActiva->setCellValue("C1", "APELLIDO");
+    $hojaActiva->setCellValue("C2", "APELLIDO");
     $hojaActiva->getColumnDimension('C')->setWidth(14);
-    $hojaActiva->setCellValue("D1", 'GENERO');
+    $hojaActiva->setCellValue("D2", 'GENERO');
     $hojaActiva->getColumnDimension('D')->setWidth(12);
-    $hojaActiva->setCellValue("E1", "CORREO");
+    $hojaActiva->setCellValue("E2", "CORREO");
     $hojaActiva->getColumnDimension('E')->setWidth(35);
-    $hojaActiva->setCellValue("F1", "TELEFONO");
+    $hojaActiva->setCellValue("F2", "TELEFONO");
     $hojaActiva->getColumnDimension('F')->setWidth(15);
-    $hojaActiva->setCellValue("G1", 'NOMBRE MESA');
+    $hojaActiva->setCellValue("G2", 'NOMBRE MESA');
     $hojaActiva->getColumnDimension('G')->setWidth(35);
-    $hojaActiva->setCellValue("H1", "ESTADO");
+    $hojaActiva->setCellValue("H2", "ESTADO");
     $hojaActiva->getColumnDimension('H')->setWidth(15);
-    $hojaActiva->setCellValue("I1", "MUNICIPIO");
+    $hojaActiva->setCellValue("I2", "MUNICIPIO");
     $hojaActiva->getColumnDimension('I')->setWidth(15);
-    $hojaActiva->setCellValue("J1", 'CODIGO');
+    $hojaActiva->setCellValue("J2", 'CODIGO');
     $hojaActiva->getColumnDimension('J')->setWidth(24);
-    $hojaActiva->setCellValue("K1", "CONSEJO COMUNAL");
+    $hojaActiva->setCellValue("K2", "CONSEJO COMUNAL");
     $hojaActiva->getColumnDimension('K')->setWidth(50);
-    $hojaActiva->setCellValue("L1", "POBLACION A IMPACTAR");
+    $hojaActiva->setCellValue("L2", "POBLACION A IMPACTAR");
     $hojaActiva->getColumnDimension('L')->setWidth(25);
-    $hojaActiva->setCellValue("M1", "TONRLADAS");
+    $hojaActiva->setCellValue("M2", "TONRLADAS");
     $hojaActiva->getColumnDimension('M')->setWidth(15);
 
-    $fila = 2;
+    $fila = 3;
     while ($resultado = pg_fetch_array($func_consultar)) {
         $hojaActiva->setCellValue("A" . $fila, $resultado["cedula"]);
         $hojaActiva->setCellValue("B" . $fila, $resultado["nombre"]);
@@ -73,8 +80,15 @@
         $hojaActiva->setCellValue("M" . $fila, $resultado["capacidad_toneladas"]);
         $fila = $fila + 1;
     }
-
+    // instanciado los estilos
     $style = new Fill();
+    // tamaño de letra de primera liena
+    $style_tit = [
+        'font' => [
+            'size' => 20,
+        ],
+    ];
+    // color verde de os titulos de campos
     $style = [
         'fill' => [
             'fillType' => Fill::FILL_SOLID,
@@ -83,48 +97,50 @@
             ],
         ],
     ];
-
-    // Aplica el estilo a la celda A1
-    $hojaActiva->getStyle('A1')->applyFromArray($style);
-    $hojaActiva->getStyle('B1')->applyFromArray($style);
-    $hojaActiva->getStyle('C1')->applyFromArray($style);
-    $hojaActiva->getStyle('D1')->applyFromArray($style);
-    $hojaActiva->getStyle('E1')->applyFromArray($style);
-    $hojaActiva->getStyle('F1')->applyFromArray($style);
-    $hojaActiva->getStyle('G1')->applyFromArray($style);
-    $hojaActiva->getStyle('H1')->applyFromArray($style);
-    $hojaActiva->getStyle('I1')->applyFromArray($style);
-    $hojaActiva->getStyle('J1')->applyFromArray($style);
-    $hojaActiva->getStyle('K1')->applyFromArray($style);
-    $hojaActiva->getStyle('L1')->applyFromArray($style);
-    $hojaActiva->getStyle('M1')->applyFromArray($style);
+    // estilos a primera linea
+    $hojaActiva->getStyle('A1')->applyFromArray($style_tit);
+    // Aplica el estilo a las celda A2 hasta M2  que son los titulos
+    $hojaActiva->getStyle('A2')->applyFromArray($style);
+    $hojaActiva->getStyle('B2')->applyFromArray($style);
+    $hojaActiva->getStyle('C2')->applyFromArray($style);
+    $hojaActiva->getStyle('D2')->applyFromArray($style);
+    $hojaActiva->getStyle('E2')->applyFromArray($style);
+    $hojaActiva->getStyle('F2')->applyFromArray($style);
+    $hojaActiva->getStyle('G2')->applyFromArray($style);
+    $hojaActiva->getStyle('H2')->applyFromArray($style);
+    $hojaActiva->getStyle('I2')->applyFromArray($style);
+    $hojaActiva->getStyle('J2')->applyFromArray($style);
+    $hojaActiva->getStyle('K2')->applyFromArray($style);
+    $hojaActiva->getStyle('L2')->applyFromArray($style);
+    $hojaActiva->getStyle('M2')->applyFromArray($style);
     // centar y color verde
     $hojaActiva->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('A1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('B1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('B1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('C1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('C1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('D1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('D1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('E1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('E1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('F1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('F1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('G1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('G1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('H1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('H1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('I1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('I1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('J1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('J1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('K1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('K1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('L1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('L1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
-    $hojaActiva->getStyle('M1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-    $hojaActiva->getStyle('M1')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('A2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('B2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('B2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('C2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('C2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('D2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('D2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('E2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('E2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('F2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('F2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('G2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('G2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('H2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('H2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('I2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('I2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('J2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('J2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('K2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('K2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('L2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('L2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
+    $hojaActiva->getStyle('M2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    $hojaActiva->getStyle('M2')->getFont()->setColor(new Color(Color::COLOR_WHITE));
 
     $writer = new Xlsx($spreadsheet);
     // espesificar fecha

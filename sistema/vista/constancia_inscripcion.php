@@ -4,10 +4,12 @@
     $id_usu = $_POST["id_mesa"];
     require('../js/fpdf/fpdf.php');
     require_once "../../usuario/modelo/mod_usuario.php";
-    $tabla = "usuarios";
+    $tabla = "mesas";
     $campos = "nombre_mesa, descripcion_estado, codigo_situr";
-    $enlace = "INNER JOIN mesas ON pk_mesa=fk_mesa INNER JOIN consejos_comunales ON pk_consejo_comunal=fk_consejo_comunal INNER JOIN estado ON pk_estado=fk_estado";
-    $condicion = "pk_usuario = $id_usu";
+    $enlace = "INNER JOIN seguridad.usuarios ON sistema.mesas.fk_usuario=seguridad.usuarios.pk_usuario INNER JOIN
+    ubicacion.estado ON sistema.mesas.fk_estado=ubicacion.estado.pk_estado INNER JOIN
+    sistema.consejos_comunales ON sistema.mesas.fk_consejo_comunal=sistema.consejos_comunales.pk_consejo_comunal";
+    $condicion = "pk_mesa = $id_usu";
     $obj_usuario=new usuarios();
 	$func_consultar=$obj_usuario->consultar($tabla, $campos, $enlace, $condicion);
     if ($resultado=pg_fetch_array($func_consultar)){

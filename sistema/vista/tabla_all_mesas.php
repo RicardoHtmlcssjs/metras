@@ -90,7 +90,7 @@
                                   $tabla="sistema.mesas";
                                   $campos="*";
                                   $enlace="INNER JOIN seguridad.usuarios ON sistema.mesas.fk_usuario=seguridad.usuarios.pk_usuario INNER JOIN ubicacion.estado ON sistema.mesas.fk_estado=ubicacion.estado.pk_estado INNER JOIN sistema.consejos_comunales ON sistema.mesas.fk_consejo_comunal=sistema.consejos_comunales.pk_consejo_comunal";
-                                  //$enlace="INNER JOIN seguridad.usuarios ON sistema.mesas.fk_usuario=seguridad.usuarios.pk_usuario INNER JOIN ubicacion.estado ON sistema.mesas.fk_estado=ubicacion.estado.pk_estado INNER JOIN ubicacion.municipio ON sistema.mesas.fk_municipio=ubicacion.municipio.pk_municipio INNER JOIN ubicacion.parroquia ON sistema.mesas.fk_parroquia=ubicacion.parroquia.pk_parroquia";                                  
+                                  //$enlace="INNER JOIN seguridad.usuarios ON sistema.mesas.fk_usuario=seguridad.usuarios.pk_usuario INNER JOIN ubicacion.estado ON sistema.mesas.fk_estado=ubicacion.estado.pk_estado INNER JOIN ubicacion.municipio ON sistema.mesas.fk_municipio=ubicacion.municipio.pk_municipio INNER JOIN ubicacion.parroquia ON sistema.mesas.fk_parroquia=ubicacion.parroquia.pk_parroquia";
                                   $condicion="1=1 ORDER BY pk_mesa";
                                   $consultar_mesas=$obj_mesa->consultar($tabla, $campos, $enlace, $condicion);
                                   while ($resultado=pg_fetch_array($consultar_mesas)) {
