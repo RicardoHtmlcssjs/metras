@@ -82,13 +82,6 @@
     </style>   
 </head>
 <body>
-  <?php
-    $usu = "msalgado";
-    $e = md5($usu);
-    echo $e . "<br>";
-    echo md5($e);
-    
-  ?>
     <div id="wrapper">
       <header class="col-xm-12">
         <div class="container-fluid">
