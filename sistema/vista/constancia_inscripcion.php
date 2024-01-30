@@ -1,6 +1,7 @@
 <?php
     session_start();
-    $id_usu = $_SESSION["id_usuario"];
+    // $id_usu = $_SESSION["id_usuario"];
+    $id_usu = $_POST["id_mesa"];
     require('../js/fpdf/fpdf.php');
     require_once "../../usuario/modelo/mod_usuario.php";
     $tabla = "usuarios";
@@ -91,5 +92,5 @@
         $pdf->AddPage("landscape", "letter"); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
         $pdf->AliasNbPages();
         $pdf->SetFont('Arial', '', 12); //colorBorde
-        $pdf->Output('certificado_' . $_SESSION['id_usuario'] . $_SESSION['nombre'] . '.pdf', 'D');
+        $pdf->Output('certificado_' . $id_usu . $_SESSION['nombre_mesa_certificado_imp'] . '.pdf', 'D');
 ?>

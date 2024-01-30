@@ -103,13 +103,6 @@ if ($_SESSION['id_usuario']) {
                     <li>
                         <a id="menu-materiales" href="#" onclick="cargar_contenido(this, 'sistema/vista/tabla_materiales.php', <?php echo $_SESSION['mesa'];?>);" style="background-color: #0c4370;">Materiales</a>
                     </li>
-                    <?php
-                    if($_SESSION['privilegio']==1){ ?>
-                        <li>
-                            <a id="menu-constancia-inscrip" name="menu-constancia-inscrip" href="sistema/vista/constancia_inscripcion.php" target="_blank"   style="background-color: #0c4370;">Certificado de Inscripción</a>
-                        </li> <?php
-                    }
-                    ?>
 
                     <!--li <?php #echo $display2; ?>>
                         <a href="#" style="background-color: #0c4370;">Reportes<span class="fa arrow"></span></a>

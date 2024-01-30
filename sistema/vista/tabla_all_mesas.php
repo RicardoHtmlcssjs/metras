@@ -40,7 +40,7 @@
                         sortAscending:  ": Activar para ordenar la columna de manera ascendente",
                         sortDescending: ": Activar para ordenar la columna de manera descendente"
                     }
-                },              
+                },
                 initComplete: function () {
                     $('.input-text').each( function () {
                         var title = $(this).text();
@@ -107,7 +107,13 @@
                                       <a href="#" class="btn btn-primary" title="Integrantes" onclick="cargar_contenido(this, 'usuario/vista/tabla_usuario.php', <?php echo $resultado['pk_mesa'];?>);"><i class="fa fa-user"></i></a>
                                       <a href="#" class="btn btn-primary" title="Materiales" onclick="cargar_contenido(this, 'sistema/vista/tabla_materiales_fecha.php', <?php echo $resultado['pk_mesa'];?>);"><i class="fa fa-book"></i></a>
                                       <a href="#" class="btn btn-danger" title="Eliminar" onclick="eliminacion(<?php echo $resultado['pk_mesa'];?>);">X</a>
-                                    </td>                                  
+                                      <!-- btn imprimir certificado -->
+                                      <form action="sistema/vista/constancia_inscripcion.php" method="post" target="_blank">
+                                        <input type="hidden" id="id_mesa" name="id_mesa" value="<?php echo $resultado['pk_mesa'];?>">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-file"></i></button>
+                                      </form>
+                                      <!-- <a href="#" class="btn btn-primary" title="Materiales" onclick="imprimir_certificado();"><i class="fa fa-file"></i></a> -->
+                                    </td>
                                   </tr>
                                 <?php
                                   }

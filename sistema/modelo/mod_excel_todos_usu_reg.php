@@ -10,18 +10,32 @@
     use PhpOffice\PhpSpreadsheet\Style\Color;
 
     $tabla = "usuarios";
-    $campos = "cedula, nombre, apellido, genero, correo, telefono, nombre_mesa, descripcion_estado, descripcion_municipio, codigo_situr , nombre_consejo_comunal, poblacion_impactar, capacidad_toneladas";
+    $campos = "cedula, nombre, apellido, genero,
+    CASE fk_privilegio
+               WHEN 1
+               THEN 'Encargado'
+               WHEN 2
+               THEN 'Colaborador'
+               WHEN 3
+               THEN 'Administrador'
+               WHEN 4
+               THEN 'Transcriptor'
+               WHEN 5
+               THEN 'Técnico'
+               ELSE 'Estatus desconocido'
+           END AS laboracomo,
+     correo, telefono, nombre_mesa, descripcion_estado, descripcion_municipio, codigo_situr , nombre_consejo_comunal, poblacion_impactar, capacidad_toneladas";
     $enlace = "INNER JOIN mesas ON pk_mesa=fk_mesa
     INNER JOIN consejos_comunales ON pk_consejo_comunal=fk_consejo_comunal
     INNER JOIN estado ON pk_estado=fk_estado
     INNER JOIN municipio ON pk_municipio=fk_municipio";
-    $condicion = "fk_privilegio=1 ORDER BY descripcion_estado, nombre_mesa";
+    $condicion = "1=1 ORDER BY descripcion_estado, nombre_mesa, fk_privilegio";
     $obj_usuario=new usuarios();
     $func_consultar=$obj_usuario->consultar($tabla, $campos, $enlace, $condicion);
 
     $spreadsheet = new SpreadSheet();
     // ESPESIFICADOR CREADO Y TITULO
-    $spreadsheet->getProperties()->setCreator("Ricardo Torres")->setTitle("Todas las metras");
+    $spreadsheet->getProperties()->setCreator("Ricardo Torres")->setTitle("Todos los usuarios de metras");
 
     $spreadsheet->setActiveSheetIndex(0);
     // SE ESTABLECE QUE TRABAJARA CON UNA HOJA ACTIVA
@@ -53,7 +67,7 @@
     $hojaActiva->getColumnDimension('K')->setWidth(50);
     $hojaActiva->setCellValue("L1", "POBLACION A IMPACTAR");
     $hojaActiva->getColumnDimension('L')->setWidth(25);
-    $hojaActiva->setCellValue("M1", "TONRLADAS");
+    $hojaActiva->setCellValue("M1", "TONELADAS");
     $hojaActiva->getColumnDimension('M')->setWidth(15);
 
     $fila = 2;
@@ -130,7 +144,7 @@
     // espesificar fecha
     $fecha = new DateTime();
     $f =  $fecha->format('Y-m-d');
-    $to = $f."_metras_totales.xlsx";
+    $to = $f."_todos_usurios_metras.xlsx";
 
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment;filename="'.$to.'"');

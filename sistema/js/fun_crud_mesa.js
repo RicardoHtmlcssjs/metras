@@ -90,6 +90,24 @@ function eliminar_mesa(mesa){
       console.log("complete");
     });  
 }
+// imprimir sertificado
+function imprimir_certificado(id_mesa){
+    $.ajax({
+      url: 'sistema/vista/constancia_inscripcion.php',
+      type: 'POST',
+      //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+      data: {id_mesa}
+    })
+    .done(function(respuesta) {
+        alert(respuesta);
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });  
+}
 
 function opciones_c_comunal(){
     var afiliado_a=$('#afiliado_a').val();
