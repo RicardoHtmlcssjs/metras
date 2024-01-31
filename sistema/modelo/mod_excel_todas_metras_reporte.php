@@ -60,7 +60,7 @@
     $hojaActiva->getColumnDimension('K')->setWidth(50);
     $hojaActiva->setCellValue("L2", "POBLACION A IMPACTAR");
     $hojaActiva->getColumnDimension('L')->setWidth(25);
-    $hojaActiva->setCellValue("M2", "TONRLADAS");
+    $hojaActiva->setCellValue("M2", "TONELADAS");
     $hojaActiva->getColumnDimension('M')->setWidth(15);
 
     $fila = 3;

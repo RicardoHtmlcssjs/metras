@@ -13,7 +13,7 @@
 			$this->user='postgres';
 			$this->password='postgres';
 			$this->server='localhost';
-			$this->port='5433';
+			$this->port='5432';
 			$this->database='mesas_reciclaje';
 			$this->conex='';
 		}

@@ -81,6 +81,9 @@
 
     </style>   
 </head>
+<?php
+  // echo md5(md5("pcomando"));
+?>
 <body>
     <div id="wrapper">
       <header class="col-xm-12">
