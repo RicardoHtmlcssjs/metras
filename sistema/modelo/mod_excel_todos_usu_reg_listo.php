@@ -3,28 +3,42 @@ require 'PHPExcel-1.8/Classes/PHPExcel.php';
 require_once "../../usuario/modelo/mod_usuario.php";
 
 $tabla = "usuarios";
-$campos = "cedula, nombre, apellido, genero, correo, telefono, nombre_mesa, descripcion_estado, descripcion_municipio, codigo_situr , nombre_consejo_comunal, poblacion_impactar, capacidad_toneladas";
-$enlace = "INNER JOIN mesas ON pk_mesa=fk_mesa
+    $campos = "cedula, nombre, apellido, genero,
+    CASE fk_privilegio
+               WHEN 1
+               THEN 'Encargado'
+               WHEN 2
+               THEN 'Colaborador'
+               WHEN 3
+               THEN 'Administrador'
+               WHEN 4
+               THEN 'Transcriptor'
+               WHEN 5
+               THEN 'Técnico'
+               ELSE 'Estatus desconocido'
+           END AS laboracomo,
+     correo, telefono, nombre_mesa, descripcion_estado, descripcion_municipio, codigo_situr , nombre_consejo_comunal, poblacion_impactar, capacidad_toneladas";
+    $enlace = "INNER JOIN mesas ON pk_mesa=fk_mesa
     INNER JOIN consejos_comunales ON pk_consejo_comunal=fk_consejo_comunal
     INNER JOIN estado ON pk_estado=fk_estado
     INNER JOIN municipio ON pk_municipio=fk_municipio";
-$condicion = "fk_privilegio=1 ORDER BY descripcion_estado, nombre_mesa";
-$obj_usuario=new usuarios();
-$func_consultar=$obj_usuario->consultar($tabla, $campos, $enlace, $condicion);
+    $condicion = "1=1 ORDER BY descripcion_estado, nombre_mesa, fk_privilegio";
+    $obj_usuario=new usuarios();
+    $func_consultar=$obj_usuario->consultar($tabla, $campos, $enlace, $condicion);
 
-// instanciando la fecha
-$fecha = new DateTime();
-$f_tit =  $fecha->format('Y-m-d');
+    // instanciando la fecha
+    $fecha = new DateTime();
+    $f_tit =  $fecha->format('Y-m-d');
 
-// Crea un objeto PHPExcel
+    // Crea un objeto PHPExcel
 $objPHPExcel = new PHPExcel();
 // este metodo se llamo para unir celdas
 $worksheet = $objPHPExcel->getActiveSheet();
-$worksheet->mergeCells('A1:M1')->setCellValue('A1', $f_tit.' - Registro de Mesas Tecnicas de Reciclaje y Aseo - Todas las mesas registradas');
+$worksheet->mergeCells('A1:M1')->setCellValue('A1', $f_tit.' - Registro de Mesas Tecnicas de Reciclaje y Aseo - Usuarios registrados');
 
 $objPHPExcel->getProperties()->setCreator('ricardo')->setTitle('titulo')->setDescription('descripcion')->setKeywords('llaves')->setCategory('ejemplos');
 $objPHPExcel->setActiveSheetIndex(0);
-$objPHPExcel->getActiveSheet()->setTitle('Mesas registradas');
+$objPHPExcel->getActiveSheet()->setTitle('Usuarios registrados en METRAS');
 
 // TITULOS DE LAS COLUMNAS
 $objPHPExcel->getActiveSheet()->setCellValue('A2', 'CEDULA');
@@ -109,7 +123,7 @@ $fila = 3;
     // centrar texto de columnas
     $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-    $to = $f_tit."_metras_totales.xlsx";
+    $to = $f_tit."_usuarios_totales_metras.xlsx";
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment;filename="'.$to.'"');
 header('Cache-Control: max-age=0');

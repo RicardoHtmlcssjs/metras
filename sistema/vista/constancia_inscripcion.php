@@ -5,7 +5,7 @@
     require('../js/fpdf/fpdf.php');
     require_once "../../usuario/modelo/mod_usuario.php";
     $tabla = "mesas";
-    $campos = "nombre_mesa, descripcion_estado, codigo_situr";
+    $campos = "nombre_mesa, descripcion_estado";
     $enlace = "INNER JOIN seguridad.usuarios ON sistema.mesas.fk_usuario=seguridad.usuarios.pk_usuario INNER JOIN
     ubicacion.estado ON sistema.mesas.fk_estado=ubicacion.estado.pk_estado INNER JOIN
     sistema.consejos_comunales ON sistema.mesas.fk_consejo_comunal=sistema.consejos_comunales.pk_consejo_comunal";
@@ -13,10 +13,10 @@
     $obj_usuario=new usuarios();
 	$func_consultar=$obj_usuario->consultar($tabla, $campos, $enlace, $condicion);
     if ($resultado=pg_fetch_array($func_consultar)){
-        $_SESSION["codigo_situr_certificado_imp"] = $resultado['codigo_situr'];
         $_SESSION["nombre_mesa_certificado_imp"] = $resultado['nombre_mesa'];
         $_SESSION["descripcion_estado_certificado_imp"] = $resultado['descripcion_estado'];
     }
+    $_SESSION["id_mesa"] = $id_usu;
 
     class PDF extends FPDF{
         function Header(){
@@ -50,7 +50,7 @@
 
                 //CUERPO DEDICADO
                 $this->SetFont('Arial', 'B', 33);
-                $this->Cell(0, 115, utf8_decode($_SESSION["codigo_situr_certificado_imp"]), 0, 0, 'R', 0);
+                $this->Cell(0, 115, utf8_decode($_SESSION["id_mesa"]), 0, 0, 'R', 0);
                 $this->Ln(5);
 
                 $this->SetFont('Arial', 'I', 33);
