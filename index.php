@@ -134,6 +134,8 @@
                                       </div>
                                       <button type="button" class="btn btn-primary" style="width: 49%;" onclick="estado_sesion('abrir');">Iniciar</button>
                                       <a href="#" data-toggle="modal" class="btn btn-default" title="Registrar"style="width: 49%;" onclick="formulario_usuario(0, 'consultar');">Registrarse</a>
+                                      <div id="res" name="res"></div>
+                                      
                                   </form>
                               </div>
                               <!-- /.col-lg-6 (nested) -->

@@ -239,18 +239,23 @@ function formulario_usuario(pk,procedimiento){
         type: 'POST',
         //dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
         data: {pk, procedimiento},
+		
     })
     .done(function(resp) {
+        alert("hola");
         $('#contenedor-modales').html(resp);
         $('#formulario_usuario').modal('show');
         //$.getScript("js/mascara_entrada.js");
         $.getScript("sistema/js/validacion_datos.js");
     })
     .fail(function() {
+        $("#res").html("hola");
+        alert("Ha ocurrido un error");
         console.log("error");
     })
     .always(function() {
         console.log("complete");
+        alert("fino");
     }); 
 }
 

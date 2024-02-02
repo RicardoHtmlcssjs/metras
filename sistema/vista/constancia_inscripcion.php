@@ -50,16 +50,34 @@
 
                 //CUERPO DEDICADO
                 $this->SetFont('Arial', 'B', 33);
-                $this->Cell(0, 115, utf8_decode($_SESSION["id_mesa"]), 0, 0, 'R', 0);
+                $this->Cell(0, 115, utf8_decode('ID METRA: '. $_SESSION["id_mesa"]), 0, 0, 'R', 0);
                 $this->Ln(5);
 
-                $this->SetFont('Arial', 'I', 33);
-                $this->Cell(0, 135, utf8_decode($_SESSION["nombre_mesa_certificado_imp"]), 0, 0, 'R', 0);
-                $this->Ln(5);
+                $nombre_metra = 'Nombre de la METRA: '.$_SESSION["nombre_mesa_certificado_imp"];
+                if(strlen($nombre_metra) >= 42){
+                    $nombre_mesa_pri = substr($nombre_metra, 0, 42);
+                    $nombre_mesa_segundo = substr($nombre_metra, 42, -1); 
+                    $this->SetFont('Arial', 'I', 33);
+                    $this->Cell(0, 135, utf8_decode($nombre_mesa_pri), 0, 0, 'R', 0);
+                    $this->Ln(5);
+                    $this->Cell(0, 155, utf8_decode($nombre_mesa_segundo), 0, 0, 'R', 0);
+                    $this->Ln(5);
 
-                $this->SetFont('Arial', 'B', 33);
-                $this->Cell(0, 155, utf8_decode($_SESSION["descripcion_estado_certificado_imp"]), 0, 0, 'R', 0);
-                $this->Ln(5);
+                    $this->SetFont('Arial', 'B', 33);
+                    $this->Cell(0, 175, utf8_decode('Estado: '.$_SESSION["descripcion_estado_certificado_imp"]), 0, 0, 'R', 0);
+                    $this->Ln(5);
+                }else{
+                    $this->SetFont('Arial', 'I', 33);
+                    $this->Cell(0, 135, utf8_decode($nombre_metra), 0, 0, 'R', 0);
+                    $this->Ln(5);
+
+                    $this->SetFont('Arial', 'B', 33);
+                    $this->Cell(0, 155, utf8_decode('Estado: '.$_SESSION["descripcion_estado_certificado_imp"]), 0, 0, 'R', 0);
+                    $this->Ln(5);
+                }
+                
+
+                
 
             // CUERPO DEBAJO
             // $this->Cell(110);  // mover a la derecha
