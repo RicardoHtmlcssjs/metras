@@ -75,18 +75,35 @@ function estado_sesion(accion){
         url: 'usuario/controlador/con_session.php',
         type: 'POST',
     //  dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-        data: {nombre_usuario, clave_usuario, accion}
-    })
+        data: {nombre_usuario, clave_usuario, accion},
+        success: function(respuesta){
+            if (respuesta=='datos-validos') {
+                        window.location="menu.php";            
+                    }else if (respuesta=='sesion-cerrada') {
+                        window.location.href = "index.php";
+                    }else if (respuesta=='datos-invalidos') {
+                        alert('Usuario y/o Contraseña Invalidos');
+                    }
 
-    .done(function(respuesta) {
-        if (respuesta=='datos-validos') {
-            window.location="menu.php";            
-        }else if (respuesta=='sesion-cerrada') {
-            window.location.href = "index.php";
-        }else if (respuesta=='datos-invalidos') {
-            alert('Usuario y/o Contraseña Invalidos');
+        },
+        error: function(error){
+            alert("ha ocurrido un error");
+             console.log(error);
         }
     })
+
+    // .done(function(respuesta) {
+    //     if (respuesta=='datos-validos') {
+    //         window.location="menu.php";            
+    //     }else if (respuesta=='sesion-cerrada') {
+    //         window.location.href = "index.php";
+    //     }else if (respuesta=='datos-invalidos') {
+    //         alert('Usuario y/o Contraseña Invalidos');
+    //     }
+    // })
+    // .fail(function() {
+    //     alert('error');
+    // });
 }
 
 function formulario_cambiar_clave(){
@@ -248,10 +265,10 @@ function formulario_usuario(pk,procedimiento){
         //$.getScript("js/mascara_entrada.js");
         $.getScript("sistema/js/validacion_datos.js");
     })
-    .fail(function() {
+    .fail(function(error) {
         $("#res").html("hola");
         alert("Ha ocurrido un error");
-        console.log("error");
+        console.log(error);
     })
     .always(function() {
         console.log("complete");

@@ -1,17 +1,18 @@
 class Acciones_usuario{
-    certificado_inscrip(num){
+    certificado_inscrip(pk, procedimiento){
         $.ajax({
-			url: "usuario/js/ajax/certificado_inscrip.php",
+			url: "usuario/controlador/crud_usuario.php",
 			type: "POST",
             data: {
-                num: num
+                pk: pk, procedimiento: procedimiento
             },
 			success: function(result){
 				alert(result);
 
 			},
 			error: function(error){
-				console.log(error);
+				alert();
+				// console.log(error);
 			}
 
 		});
