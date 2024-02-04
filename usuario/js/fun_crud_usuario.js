@@ -83,6 +83,10 @@ function estado_sesion(accion){
                         window.location.href = "index.php";
                     }else if (respuesta=='datos-invalidos') {
                         alert('Usuario y/o Contraseña Invalidos');
+                        $("#res").html("");
+                    }else{
+                        $("#res").html("<div style='font-size: 20px;' class='alert alert-danger text-center' role='alert'>Ha ocurrido un error.</div>");
+                        console.log(respuesta);
                     }
 
         },

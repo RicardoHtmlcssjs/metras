@@ -73,9 +73,6 @@
                     $this->Cell(0, 165, utf8_decode('Estado: '.$_SESSION["descripcion_estado_certificado_imp"]), 0, 0, 'R', 0);
                     $this->Ln(5);
                 }
-                
-
-                
 
             // CUERPO DEBAJO
             // $this->Cell(110);  // mover a la derecha
