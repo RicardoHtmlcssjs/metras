@@ -263,20 +263,18 @@ function formulario_usuario(pk,procedimiento){
 		
     })
     .done(function(resp) {
-        alert("hola");
         $('#contenedor-modales').html(resp);
         $('#formulario_usuario').modal('show');
         //$.getScript("js/mascara_entrada.js");
         $.getScript("sistema/js/validacion_datos.js");
     })
     .fail(function(error) {
-        $("#res").html("hola");
+        $("#res").html("Ha ocurrido un error");
         alert("Ha ocurrido un error");
         console.log(error);
     })
     .always(function() {
         console.log("complete");
-        alert("fino");
     }); 
 }
 

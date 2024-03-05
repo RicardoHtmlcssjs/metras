@@ -93,7 +93,7 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="telefono">Telefono:</label>
-                                <input type="text" id="telefono" class="form-control tiponumerico" value="<?php echo $telefono; ?>" onkeyup="verificar_duplicidad('telefono');" maxlength="11" placeholder="Telefono">
+                                <input type="text" id="telefono" class="form-control tiponumerico" value="<?php echo $telefono; ?>"  maxlength="11" placeholder="Telefono">
                               </div>
                             </div>                          
                         </div>
@@ -117,7 +117,7 @@
                               <div class="col-md-12">
                                 <div class="form-group">
                                   <label for="nombre_mesa">Nombre de Mesa:</label>
-                                  <input type="text" id="nombre_mesa" class="form-control" value="<?php echo $nombre_mesa; ?>" <?php echo $accesibilidad;?> placeholder="Nombre de Mesa">
+                                  <input type="text" id="nombre_mesa" class="form-control" value="<?php echo $nombre_mesa; ?>" <?php echo $accesibilidad;?> placeholder="Nombre de Mesa" required>
                                 </div>
                               </div>
 
@@ -152,7 +152,7 @@
                                 <div class="form-group">
                                   <label>Afiliado a:</label>
                                   <select id="afiliado_a" class="form-control" onchange="opciones_c_comunal();" <?php echo $accesibilidad;?>>
-                                      <option value="0">SELECCIONE...</option>
+                                      
                                       <option <?php echo $consejo_comunal;?> value="1">CONSEJO COMUNAL</option>
                                       <option <?php echo $independiente;?> value="2">INDEPENDIENTE</option>
                                   </select>

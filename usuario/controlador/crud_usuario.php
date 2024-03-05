@@ -269,7 +269,7 @@ switch ($procedimiento) {
           if ($fun_modificar_usuario) {
             //echo "Registro de Usuario Exitoso USUARIO: $usuario CONTRASEÑA: $cedula";
             echo 1;
-            $asunto="Resgistro de Usuario";
+            $asunto="Registro de Usuario";
             $mensaje="Registro de Usuario Exitoso, sus credenciales son: <br/><b>Usuario</b>: $usuario <br/> <b>Clave</b>: $cedula.";
             $enviar_correo=$obj_usuario->enviar_correo($correo, $nombre, $asunto, $mensaje);            
           }else{
